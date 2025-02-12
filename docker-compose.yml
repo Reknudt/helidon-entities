@@ -1,0 +1,14 @@
+version: '3'
+services:
+  employee-db:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    container_name: employee-db-postgres-hp
+    environment:
+      - POSTGRES_DB=employee-db
+      - POSTGRES_PASSWORD=pgpass
+      - POSTGRES_USER=pguser
+    volumes:
+      - ./data:/var/lib/postgresql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql

@@ -1,0 +1,15 @@
+metrics:
+  rest-request:
+    enabled: 'false'
+server:
+  host: 0.0.0.0
+  port: '8080'
+javax:
+  sql:
+    DataSource:
+      ds1:
+        dataSource:
+          user: pguser
+          url: jdbc:postgresql://localhost:5432/employee-db
+          password: pgpass
+        dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
