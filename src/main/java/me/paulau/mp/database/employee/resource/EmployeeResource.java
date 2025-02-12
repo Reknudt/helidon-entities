@@ -15,10 +15,14 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
 import static jakarta.ws.rs.core.Response.ok;
 
-@Path("/employee")
+@Path("/employeeOld")
 @RequestScoped
 public class EmployeeResource {
 
@@ -34,6 +38,9 @@ public class EmployeeResource {
 
     @GET
     @Path("/all")
+    @APIResponse(responseCode = "200", description = "Find all employees",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Employee.class)))
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllEmployees() {
         return ok(this.employeeService.getAllEmployees()).build();
@@ -41,13 +48,26 @@ public class EmployeeResource {
 
     @POST
     @Path("/save")
+    @APIResponses(value = {
+            @APIResponse(responseCode = "201", description = "Employee created",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Employee.class))),
+            @APIResponse(responseCode = "400", description = "Invalid form filling",
+                    content = @Content)})
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response save(Employee employee) {
-        return ok(this.employeeService.save(employee)).build();
+        Employee save = this.employeeService.save(employee);
+        return ok(save).build();
     }
 
     @DELETE
     @Path("/delete/{id}/")
+    @APIResponses(value = {
+            @APIResponse(responseCode = "204", description = "Employee deleted",
+                    content = @Content),
+            @APIResponse(responseCode = "400", description = "Invalid form filling",
+                    content = @Content)})
     public Response deleteOrderById(@PathParam("id") Long id) {
         try {
             this.employeeService.deleteById(id);
