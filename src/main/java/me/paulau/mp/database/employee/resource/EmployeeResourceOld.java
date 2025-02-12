@@ -1,7 +1,7 @@
 package me.paulau.mp.database.employee.resource;
 
 import me.paulau.mp.database.employee.model.Employee;
-import me.paulau.mp.database.employee.service.EmployeeService;
+import me.paulau.mp.database.employee.service.EmployeeServicePers;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -22,18 +22,18 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
 import static jakarta.ws.rs.core.Response.ok;
 
-@Path("/employee")
+@Path("/employeeOld")
 @RequestScoped
-public class EmployeeResource {
+public class EmployeeResourceOld {
 
-    private final EmployeeService employeeService;
+    private final EmployeeServicePers employeeServicePers;
 
     @PersistenceContext(unitName = "pu1")
     private EntityManager entityManager;
 
     @Inject
-    public EmployeeResource(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public EmployeeResourceOld(EmployeeServicePers employeeServicePers) {
+        this.employeeServicePers = employeeServicePers;
     }
 
     @GET
@@ -43,7 +43,7 @@ public class EmployeeResource {
                     schema = @Schema(implementation = Employee.class)))
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllEmployees() {
-        return ok(this.employeeService.getAllEmployees()).build();
+        return ok(this.employeeServicePers.getAllEmployees()).build();
     }
 
     @POST
@@ -57,7 +57,7 @@ public class EmployeeResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response save(Employee employee) {
-        Employee save = this.employeeService.create(employee);
+        Employee save = this.employeeServicePers.save(employee);
         return ok(save).build();
     }
 
@@ -70,7 +70,7 @@ public class EmployeeResource {
                     content = @Content)})
     public Response deleteOrderById(@PathParam("id") Long id) {
         try {
-            this.employeeService.deleteById(id);
+            this.employeeServicePers.deleteById(id);
         } catch (Exception e) {
             return Response.status(Response.Status.OK).entity("Delete failed").build();
         }
