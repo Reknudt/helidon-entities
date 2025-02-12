@@ -22,7 +22,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
 import static jakarta.ws.rs.core.Response.ok;
 
-@Path("/employeeOld")
+@Path("/employee")
 @RequestScoped
 public class EmployeeResource {
 
@@ -57,7 +57,7 @@ public class EmployeeResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response save(Employee employee) {
-        Employee save = this.employeeService.save(employee);
+        Employee save = this.employeeService.create(employee);
         return ok(save).build();
     }
 

@@ -1,49 +1,27 @@
 package me.paulau.mp.database.employee.repository;
 
+import jakarta.data.repository.CrudRepository;
+import jakarta.data.repository.Delete;
+import jakarta.data.repository.Find;
+import jakarta.data.repository.Insert;
+import jakarta.data.repository.Repository;
+import jakarta.data.repository.Update;
 import me.paulau.mp.database.employee.model.Employee;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaDelete;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
-import jakarta.transaction.Transactional;
 
 import java.util.List;
 
-@ApplicationScoped
-public class EmployeeRepository {
+@Repository
+public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
-    @PersistenceContext
-    EntityManager entityManager;
+    @Find
+    List<Employee> findAllEmployees();
 
-    @Transactional
-    public Employee createOrUpdate(Employee employee) {
-        if (employee == null) {
-            this.entityManager.persist(employee);
-            return employee;
-        } else {
-            return this.entityManager.merge(employee);
-        }
-    }
+    @Insert
+    Employee insert(Employee employee);
 
-    @Transactional
-    public void deleteById(Long id) {
-        CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
-        CriteriaDelete<Employee> delete = cb.createCriteriaDelete(Employee.class);
-        Root<Employee> root = delete.from(Employee.class);
-        delete.where(cb.equal(root.get("id"), id));
-        this.entityManager.createQuery(delete).executeUpdate();
-    }
+    @Update
+    Employee update(Employee employee);
 
-    public List<Employee> getAllEmployees() {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Employee> cq = cb.createQuery(Employee.class);
-        Root<Employee> rootEntry = cq.from(Employee.class);
-        CriteriaQuery<Employee> all = cq.select(rootEntry);
-        TypedQuery<Employee> allQuery = entityManager.createQuery(all);
-        return allQuery.getResultList();
-    }
+    @Delete
+    void deleteById(long id);
 }
