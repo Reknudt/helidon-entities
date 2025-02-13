@@ -9,6 +9,6 @@ import me.paulau.mp.database.employee.model.Employee;
 @Repository
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
-    @Delete
-    void deleteById(long id);
+//    @Delete
+//    void deleteById(long id);
 }
