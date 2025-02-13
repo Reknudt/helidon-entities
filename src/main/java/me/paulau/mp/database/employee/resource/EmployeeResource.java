@@ -19,6 +19,8 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
+import java.util.List;
+
 import static jakarta.ws.rs.core.Response.ok;
 
 @Path("/employee")
@@ -48,8 +50,8 @@ public class EmployeeResource {
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = Employee.class)))
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllEmployees() {
-        return ok(this.employeeService.getAllEmployees()).build();
+    public List<Employee> getAllEmployees() {
+        return employeeService.getAllEmployees();
     }
 
     @POST
