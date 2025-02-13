@@ -5,7 +5,6 @@
              version="3.1">
 
     <persistence-unit name="pu1" transaction-type="JTA">
-<!--        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
         <jta-data-source>ds1</jta-data-source>
         <class>me.paulau.mp.database.employee.model.Employee</class>
         <properties>
