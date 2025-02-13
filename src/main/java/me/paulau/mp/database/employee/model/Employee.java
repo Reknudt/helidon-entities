@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 @Entity(name = "employee")
 @Table(name = "Employee")
-@NoArgsConstructor
 public class Employee {
 
     private long id;

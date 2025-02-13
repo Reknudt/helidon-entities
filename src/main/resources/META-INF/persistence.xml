@@ -8,6 +8,7 @@
         <jta-data-source>ds1</jta-data-source>
         <class>me.paulau.mp.database.employee.model.Employee</class>
         <class>me.paulau.mp.database.employee.model.Department</class>
+        <class>me.paulau.mp.database.employee.model.Project</class>
         <properties>
             <property name="hibernate.column_ordering_strategy" value="legacy"/>
             <property name="jakarta.persistence.sql-load-script-source" value="META-INF/init_script.sql"/>

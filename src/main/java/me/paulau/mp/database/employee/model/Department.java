@@ -3,6 +3,7 @@ package me.paulau.mp.database.employee.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
@@ -25,7 +26,7 @@ public class Department {
 
     private List<Employee> employees;
 
-//    private List<Project> projects;
+    private List<Project> projects;
 
     @Id
     @Column(name = "id", nullable = false, updatable = false)
@@ -55,8 +56,8 @@ public class Department {
         this.bossId = bossId;
     }
 
-    @OneToMany
-    @JoinColumn(name = "departmentId")
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id")
     public List<Employee> getEmployees() {
         return employees;
     }
@@ -65,13 +66,13 @@ public class Department {
         this.employees = employees;
     }
 
-//    @JsonIgnore
-//    @ManyToMany(mappedBy = "departments")
-//    public List<Project> getProjects() {
-//        return projects;
-//    }
-//
-//    public void setProjects(List<Project> projects) {
-//        this.projects = projects;
-//    }
+    @JsonIgnore
+    @ManyToMany(mappedBy = "departments", fetch = FetchType.EAGER)
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
 }

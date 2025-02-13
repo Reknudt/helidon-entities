@@ -228,6 +228,7 @@
             <plugin>
                 <groupId>org.hibernate.orm.tooling</groupId>
                 <artifactId>hibernate-enhance-maven-plugin</artifactId>
+                <version>${hibernate.core.version}</version>
                 <executions>
                     <execution>
                         <configuration>
