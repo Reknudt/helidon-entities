@@ -11,7 +11,6 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import lombok.Getter;
 import me.paulau.mp.database.employee.model.Employee;
 import me.paulau.mp.database.employee.service.EmployeeService;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
@@ -23,13 +22,9 @@ import static jakarta.ws.rs.core.Response.ok;
 
 @Path("/employee")
 @ApplicationScoped
-@Getter
 public class EmployeeResource {
 
     private final EmployeeService employeeService;
-
-//    @PersistenceContext(unitName = "pu1")
-//    private EntityManager entityManager;
 
     @Inject
     public EmployeeResource(EmployeeService employeeService) {

@@ -29,6 +29,9 @@ public class DepartmentResource {
 
     private final DepartmentService departmentService;
 
+//    @PersistenceContext(unitName = "pu1")
+//    private EntityManager entityManager;
+
     @Inject
     public DepartmentResource(DepartmentService departmentService) {
         this.departmentService = departmentService;
