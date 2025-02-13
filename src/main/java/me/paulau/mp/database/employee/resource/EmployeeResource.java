@@ -6,6 +6,7 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -40,8 +41,8 @@ public class EmployeeResource {
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = Employee.class)))
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Employee> getAllEmployees() {
-        return employeeService.getAllEmployees();
+    public Response getAllEmployees() {
+        return ok(employeeService.getAllEmployees()).build();
     }
 
     @POST
@@ -56,6 +57,21 @@ public class EmployeeResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response save(Employee employee) {
         Employee save = this.employeeService.create(employee);
+        return ok(save).build();
+    }
+
+    @PUT
+    @Path("/update")
+    @APIResponses(value = {
+            @APIResponse(responseCode = "200", description = "Employee updated",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Employee.class))),
+            @APIResponse(responseCode = "400", description = "Invalid form filling",
+                    content = @Content)})
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response update(Employee employee) {
+        Employee save = this.employeeService.update(employee);
         return ok(save).build();
     }
 

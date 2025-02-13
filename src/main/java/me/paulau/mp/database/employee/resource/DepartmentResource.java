@@ -6,6 +6,7 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -17,6 +18,7 @@ import me.paulau.mp.database.employee.model.Employee;
 import me.paulau.mp.database.employee.service.DepartmentService;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
@@ -45,8 +47,8 @@ public class DepartmentResource {
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = Department.class)))
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Department> getAllDepartments() {
-        return departmentService.getAllDepartments();
+    public Response getAllDepartments() {
+        return ok(departmentService.getAllDepartments()).build();
     }
 
     @POST
@@ -62,6 +64,20 @@ public class DepartmentResource {
     public Response save(Department department) {
         Department save = this.departmentService.create(department);
         return ok(save).build();
+    }
+
+    @PUT
+    @Path("/{id}")
+    @APIResponses(value = {
+            @APIResponse(responseCode = "200", description = "Department updated",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Department.class))),
+            @APIResponse(responseCode = "400", description = "Invalid form filling",
+                    content = @Content)})
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void update(@PathParam("id") Long id, @RequestBody Department departmentRequest) {
+        departmentService.update(id, departmentRequest);
     }
 
     @DELETE

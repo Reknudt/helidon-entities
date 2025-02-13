@@ -8,19 +8,24 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity(name = "project")
 @Table(name = "project")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Project {
 
     private long id;
 
     private String name;
 
-    private List<Department> departments;
+    private List<Department> departments = new ArrayList<>();
 
     @Id
     @Column(name = "id", nullable = false, updatable = false)
