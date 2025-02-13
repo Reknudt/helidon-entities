@@ -6,7 +6,6 @@
 
     <persistence-unit name="pu1" transaction-type="JTA">
         <jta-data-source>ds1</jta-data-source>
-<!--        <class>me.paulau.mp.database.Pokemon</class>-->
         <class>me.paulau.mp.database.employee.model.Employee</class>
         <properties>
             <property name="hibernate.column_ordering_strategy" value="legacy"/>

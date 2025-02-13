@@ -1,11 +1,7 @@
 package me.paulau.mp.database.employee.resource;
 
-import me.paulau.mp.database.employee.model.Employee;
-import me.paulau.mp.database.employee.service.EmployeeService;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -15,6 +11,9 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import lombok.Getter;
+import me.paulau.mp.database.employee.model.Employee;
+import me.paulau.mp.database.employee.service.EmployeeService;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -22,18 +21,25 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
 import static jakarta.ws.rs.core.Response.ok;
 
-@Path("/employeeOld")
-@RequestScoped
+@Path("/employee")
+@ApplicationScoped
+@Getter
 public class EmployeeResource {
 
     private final EmployeeService employeeService;
 
-    @PersistenceContext(unitName = "pu1")
-    private EntityManager entityManager;
+//    @PersistenceContext(unitName = "pu1")
+//    private EntityManager entityManager;
 
     @Inject
     public EmployeeResource(EmployeeService employeeService) {
         this.employeeService = employeeService;
+    }
+
+    @GET
+    @Path("/test")
+    public String getString() {
+        return "nononononon";
     }
 
     @GET
@@ -57,7 +63,7 @@ public class EmployeeResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response save(Employee employee) {
-        Employee save = this.employeeService.save(employee);
+        Employee save = this.employeeService.create(employee);
         return ok(save).build();
     }
 

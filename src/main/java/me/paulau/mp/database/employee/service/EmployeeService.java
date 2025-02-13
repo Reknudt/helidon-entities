@@ -1,10 +1,10 @@
 package me.paulau.mp.database.employee.service;
 
-import me.paulau.mp.database.employee.model.Employee;
-import me.paulau.mp.database.employee.repository.EmployeeRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import me.paulau.mp.database.employee.model.Employee;
+import me.paulau.mp.database.employee.repository.EmployeeRepository;
 
 import java.util.List;
 
@@ -19,12 +19,12 @@ public class EmployeeService {
     }
 
     @Transactional
-    public Employee save(Employee employee) {
-        return employeeRepository.createOrUpdate(employee);
+    public Employee create(Employee employee) {
+        return employeeRepository.insert(employee);
     }
 
     public List<Employee> getAllEmployees() {
-        return employeeRepository.getAllEmployees();
+        return employeeRepository.findAll().toList();
     }
 
     @Transactional
