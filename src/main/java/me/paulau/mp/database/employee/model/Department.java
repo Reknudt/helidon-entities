@@ -8,12 +8,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 
 @Entity(name = "department")
-@Table(name = "department")
+@Table(name = "Department")
 public class Department {
 
     private long id;

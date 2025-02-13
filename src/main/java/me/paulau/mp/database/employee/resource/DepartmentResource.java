@@ -20,6 +20,8 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
+import java.util.List;
+
 import static jakarta.ws.rs.core.Response.ok;
 
 @Path("/department")
@@ -43,8 +45,8 @@ public class DepartmentResource {
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = Department.class)))
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllDepartments() {
-        return ok(this.departmentService.getAllDepartments()).build();
+    public List<Department> getAllDepartments() {
+        return departmentService.getAllDepartments();
     }
 
     @POST
