@@ -10,6 +10,9 @@ import jakarta.persistence.Table;
 @Table(name = "employee")
 public class Employee {
 
+    public Employee() {
+    }
+
     private long id;
 
     private String name;
