@@ -12,8 +12,9 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import lombok.Getter;
+import me.paulau.mp.database.employee.model.Department;
 import me.paulau.mp.database.employee.model.Employee;
-import me.paulau.mp.database.employee.service.EmployeeService;
+import me.paulau.mp.database.employee.service.DepartmentService;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -21,56 +22,53 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
 import static jakarta.ws.rs.core.Response.ok;
 
-@Path("/employee")
+@Path("/department")
 @ApplicationScoped
 @Getter
-public class EmployeeResource {
+public class DepartmentResource {
 
-    private final EmployeeService employeeService;
-
-//    @PersistenceContext(unitName = "pu1")
-//    private EntityManager entityManager;
+    private final DepartmentService departmentService;
 
     @Inject
-    public EmployeeResource(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public DepartmentResource(DepartmentService departmentService) {
+        this.departmentService = departmentService;
     }
 
     @GET
     @Path("/all")
-    @APIResponse(responseCode = "200", description = "Find all employees",
+    @APIResponse(responseCode = "200", description = "Find all departments",
             content = @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = Employee.class)))
+                    schema = @Schema(implementation = Department.class)))
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllEmployees() {
-        return ok(this.employeeService.getAllEmployees()).build();
+    public Response getAllDepartments() {
+        return ok(this.departmentService.getAllDepartments()).build();
     }
 
     @POST
     @Path("/save")
     @APIResponses(value = {
-            @APIResponse(responseCode = "201", description = "Employee created",
+            @APIResponse(responseCode = "201", description = "Department created",
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = Employee.class))),
             @APIResponse(responseCode = "400", description = "Invalid form filling",
                     content = @Content)})
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response save(Employee employee) {
-        Employee save = this.employeeService.create(employee);
+    public Response save(Department department) {
+        Department save = this.departmentService.create(department);
         return ok(save).build();
     }
 
     @DELETE
     @Path("/delete/{id}/")
     @APIResponses(value = {
-            @APIResponse(responseCode = "204", description = "Employee deleted",
+            @APIResponse(responseCode = "204", description = "Department deleted",
                     content = @Content),
             @APIResponse(responseCode = "400", description = "Invalid form filling",
                     content = @Content)})
-    public Response deleteEmployeeById(@PathParam("id") Long id) {
+    public Response deleteDepartmentById(@PathParam("id") Long id) {
         try {
-            this.employeeService.deleteById(id);
+            this.departmentService.deleteById(id);
         } catch (Exception e) {
             return Response.status(Response.Status.OK).entity("Delete failed").build();
         }
