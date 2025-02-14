@@ -56,7 +56,7 @@ public class DepartmentResource {
     @APIResponses(value = {
             @APIResponse(responseCode = "201", description = "Department created",
                     content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Employee.class))),
+                            schema = @Schema(implementation = Department.class))),
             @APIResponse(responseCode = "400", description = "Invalid form filling",
                     content = @Content)})
     @Consumes(MediaType.APPLICATION_JSON)

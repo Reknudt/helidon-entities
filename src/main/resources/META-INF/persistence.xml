@@ -12,6 +12,8 @@
         <properties>
             <property name="hibernate.column_ordering_strategy" value="legacy"/>
             <property name="jakarta.persistence.sql-load-script-source" value="META-INF/init_script.sql"/>
+            <property name="org.hibernate.SQL" value="TRACE"/>
+            <property name="org.hibernate.orm.jdbc.bind" value="TRACE"/>
         </properties>
     </persistence-unit>
 </persistence>

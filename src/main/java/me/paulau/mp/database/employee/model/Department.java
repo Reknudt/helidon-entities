@@ -10,7 +10,9 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -18,15 +20,18 @@ import java.util.List;
 @Table(name = "Department")
 public class Department {
 
+    @Setter
     private long id;
 
+    @Setter
     private String name;
 
+    @Setter
     private long bossId;
 
-    private List<Employee> employees;
+    private List<Employee> employees = new ArrayList<>();
 
-    private List<Project> projects;
+    private List<Project> projects = new ArrayList<>();
 
     @Id
     @Column(name = "id", nullable = false, updatable = false)
@@ -34,26 +39,14 @@ public class Department {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Column(name = "boss_id")
     public long getBossId() {
         return bossId;
-    }
-
-    public void setBossId(long bossId) {
-        this.bossId = bossId;
     }
 
     @OneToMany(fetch = FetchType.EAGER)
@@ -63,7 +56,7 @@ public class Department {
     }
 
     public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
+        this.employees = employees != null ? employees : new ArrayList<>();
     }
 
     @JsonIgnore
@@ -73,6 +66,6 @@ public class Department {
     }
 
     public void setProjects(List<Project> projects) {
-        this.projects = projects;
+        this.projects = projects != null ? projects : new ArrayList<>();
     }
 }

@@ -2,6 +2,7 @@ package me.paulau.mp.database.employee.resource;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -74,6 +75,41 @@ public class ProjectResource {
     public void update(@PathParam("id") Long id, @RequestBody Project projectRequest) {
         projectService.update(id, projectRequest);
     }
+
+//    @PUT
+//    @Path("assignDepartment/{id}")
+//    @APIResponses(value = {
+//            @APIResponse(responseCode = "200", description = "Assign department to project updated",
+//                    content = @Content),
+//            @APIResponse(responseCode = "400", description = "Invalid form filling",
+//                    content = @Content)})
+//    public void assignToDepartment(@PathParam("id") Long id, @RequestBody Long departmentId) {
+//        projectService.assignDepartment(id, departmentId);
+//    }
+//
+//    @PUT
+//    @Path("removeDepartment/{id}")
+//    @APIResponses(value = {
+//            @APIResponse(responseCode = "200", description = "Remove department from updated",
+//                    content = @Content),
+//            @APIResponse(responseCode = "400", description = "Invalid form filling",
+//                    content = @Content)})
+//    public void removeFromDepartment(@PathParam("id") Long id, @RequestBody Long departmentId) {
+//        projectService.removeDepartment(id, departmentId);
+//    }
+
+    @PUT
+    @Path("assignDepartmentList/{id}")
+    @APIResponses(value = {
+            @APIResponse(responseCode = "200", description = "Assign department to project updated",
+                    content = @Content(mediaType = "application/json")),
+            @APIResponse(responseCode = "400", description = "Invalid form filling",
+                    content = @Content)})
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void assignDepartmentList(@PathParam("id") Long id, List<Long> departmentIds) {
+        projectService.updateDepartmentList(id, departmentIds);
+    }
+
 
     @DELETE
     @Path("/delete/{id}/")

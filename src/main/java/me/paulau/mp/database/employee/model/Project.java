@@ -49,8 +49,8 @@ public class Project {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "department_project",
-            joinColumns = @JoinColumn(name = "department_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"))
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "department_id"))
     public List<Department> getDepartments() {
         return departments;
     }

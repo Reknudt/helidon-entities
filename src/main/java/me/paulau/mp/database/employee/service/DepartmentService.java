@@ -46,7 +46,7 @@ public class DepartmentService {
         departmentRepository.deleteById(id);
     }
 
-    private Department findByIdOrThrow(Long id) {
+    public Department findByIdOrThrow(Long id) {
         return departmentRepository.findById(id)
                 .orElseThrow(
                         () -> new NotFoundException("Department "+ id + " not found"));
