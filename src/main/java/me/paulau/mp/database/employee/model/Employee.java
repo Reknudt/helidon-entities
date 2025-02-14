@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "Employee")
 public class Employee {
 
+    public Employee() {
+    }
+
     private long id;
 
     private String name;
