@@ -23,6 +23,9 @@ public class EmployeeService {
         return employeeRepository.insert(employee);
     }
 
+    @Transactional
+    public Employee update(Employee employee) { return employeeRepository.update(employee); }
+
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll().toList();
     }

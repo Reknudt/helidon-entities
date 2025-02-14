@@ -4,10 +4,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.NoArgsConstructor;
 
 
 @Entity(name = "employee")
-@Table(name = "employee")
+@Table(name = "Employee")
 public class Employee {
 
     public Employee() {

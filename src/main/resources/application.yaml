@@ -13,7 +13,3 @@ javax:
           url: jdbc:postgresql://localhost:5432/employee-db
           password: pgpass
         dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
-#
-#io.helidon.me.paulau.mp.database.employee.MyApplication:
-#  routing-path:
-#    path: "/rest"
