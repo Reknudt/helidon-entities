@@ -2,11 +2,9 @@ package me.paulau.mp.database.employee.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
 import me.paulau.mp.database.employee.model.Department;
-import me.paulau.mp.database.employee.model.Employee;
 import me.paulau.mp.database.employee.model.Project;
 import me.paulau.mp.database.employee.repository.ProjectRepository;
 

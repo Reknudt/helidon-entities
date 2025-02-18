@@ -8,7 +8,6 @@ import me.paulau.mp.database.employee.model.Department;
 import me.paulau.mp.database.employee.repository.DepartmentRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @ApplicationScoped
 public class DepartmentService {

@@ -14,7 +14,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import lombok.Getter;
 import me.paulau.mp.database.employee.model.Department;
-import me.paulau.mp.database.employee.model.Employee;
 import me.paulau.mp.database.employee.service.DepartmentService;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -22,7 +21,6 @@ import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
-import java.util.List;
 
 import static jakarta.ws.rs.core.Response.ok;
 

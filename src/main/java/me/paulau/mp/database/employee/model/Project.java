@@ -9,16 +9,19 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Entity(name = "project")
 @Table(name = "project")
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
 public class Project {
 
     private long id;
@@ -33,17 +36,9 @@ public class Project {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     @Column(name = "name", nullable = false)
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -55,7 +50,4 @@ public class Project {
         return departments;
     }
 
-    public void setDepartments(List<Department> departments) {
-        this.departments = departments;
-    }
 }
