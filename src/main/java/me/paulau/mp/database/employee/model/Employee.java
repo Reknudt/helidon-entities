@@ -5,21 +5,29 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.NoArgsConstructor;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
+import java.util.List;
 
 
 @Entity(name = "employee")
 @Table(name = "Employee")
+@Schema(description = "Employee model")
 public class Employee {
 
     public Employee() {
     }
 
+    @Schema(description = "Unique employee id")
     private long id;
 
+    @Schema(description = "Employee name")
     private String name;
 
+    @Schema(description = "Id of employee's boss")
     private long bossId;
 
+    @Schema(description = "Employee's email")
     private long departmentId;
 
     @Id
@@ -58,4 +66,5 @@ public class Employee {
     public void setDepartmentId(long departmentId) {
         this.departmentId = departmentId;
     }
+
 }
