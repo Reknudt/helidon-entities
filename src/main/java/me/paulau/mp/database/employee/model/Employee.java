@@ -27,7 +27,7 @@ public class Employee {
     @Schema(description = "Id of employee's boss")
     private long bossId;
 
-    @Schema(description = "Employee's email")
+    @Schema(description = "Id of employee's department")
     private long departmentId;
 
     @Id

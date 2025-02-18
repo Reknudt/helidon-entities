@@ -16,6 +16,7 @@ import jakarta.ws.rs.core.Response;
 import me.paulau.mp.database.employee.model.Employee;
 import me.paulau.mp.database.employee.service.EmployeeService;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
@@ -39,7 +40,22 @@ public class EmployeeResource {
     @Path("/all")
     @APIResponse(responseCode = "200", description = "Find all employees",
             content = @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = Employee.class)))
+                    schema = @Schema(implementation = Employee.class),
+            examples = {
+                    @ExampleObject(
+                            name = "Employee's example",
+                            description = "This is an example of JSON response from Employee's get. " +
+                                    "Here are an id field, name, bossId, departmentId",
+                            value = """
+                            {
+                                "id": 1,
+                                "name": "Akella Jn.",
+                                "bossId": 1,
+                                "department": 1
+                            }
+                            """
+                    )
+            }))
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllEmployees() {
         return ok(employeeService.getAllEmployees()).build();
