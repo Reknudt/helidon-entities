@@ -4,6 +4,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 
@@ -20,9 +23,11 @@ public class Employee {
     private long id;
 
     @Schema(description = "Employee name")
+    @NotBlank
     private String name;
 
     @Schema(description = "Id of employee's boss")
+    @PositiveOrZero
     private long bossId;
 
     @Schema(description = "Id of employee's department")
