@@ -184,22 +184,11 @@
             <version>${jakarta.data.version}</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>io.github.belgif.rest.problem</groupId>-->
-<!--            <artifactId>belgif-rest-problem-java-ee</artifactId>-->
-<!--            <version>0.15.0</version>-->
-<!--            <classifier>jakarta</classifier>-->
-<!--        </dependency>-->
-        <dependency>
-            <groupId>io.github.belgif.rest.problem</groupId>
-            <artifactId>belgif-rest-problem</artifactId>
-            <version>0.15.0</version>
-        </dependency>
-
         <dependency>
             <groupId>jakarta.ws.rs</groupId>
             <artifactId>jakarta.ws.rs-api</artifactId>
         </dependency>
+
     </dependencies>
 
 
