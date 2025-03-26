@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
@@ -67,7 +68,7 @@ public class EmployeeResource {
     @APIResponse(responseCode = "400", description = "Invalid form filling", content = @Content)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response save(@Valid @RequestBody Employee employee) {
+    public Response save(@HeaderParam(value = "Accept-Language") String locale, @Valid @RequestBody Employee employee) {
         Employee save = this.employeeService.create(employee);
         return ok(save).build();
     }

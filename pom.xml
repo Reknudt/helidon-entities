@@ -184,11 +184,16 @@
             <version>${jakarta.data.version}</version>
         </dependency>
 
+
         <dependency>
             <groupId>jakarta.ws.rs</groupId>
             <artifactId>jakarta.ws.rs-api</artifactId>
         </dependency>
-
+<!--        <dependency>-->
+<!--            <groupId>com.github.t1</groupId>-->
+<!--            <artifactId>problem-details-ri-lib</artifactId>-->
+<!--            <version>3.0.1</version>-->
+<!--        </dependency>-->
     </dependencies>
 
 
