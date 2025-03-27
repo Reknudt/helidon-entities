@@ -39,9 +39,7 @@ public class ProjectResource {
 
     @GET
     @Path("/all")
-    @APIResponse(responseCode = "200", description = "Find all projects",
-            content = @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = Project.class)))
+    @APIResponse(responseCode = "200", description = "Find all projects", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Project.class)))
     @Produces(MediaType.APPLICATION_JSON)
     public List<Project> getAllProjects() {
         return projectService.getAllProjects();
@@ -49,12 +47,8 @@ public class ProjectResource {
 
     @POST
     @Path("/save")
-    @APIResponses(value = {
-            @APIResponse(responseCode = "201", description = "Project created",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Project.class))),
-            @APIResponse(responseCode = "400", description = "Invalid form filling",
-                    content = @Content)})
+    @APIResponse(responseCode = "201", description = "Project created", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Project.class)))
+    @APIResponse(responseCode = "400", description = "Invalid form filling", content = @Content)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response save(Project project) {
@@ -64,12 +58,8 @@ public class ProjectResource {
 
     @PUT
     @Path("/{id}")
-    @APIResponses(value = {
-            @APIResponse(responseCode = "200", description = "Project updated",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Department.class))),
-            @APIResponse(responseCode = "400", description = "Invalid form filling",
-                    content = @Content)})
+    @APIResponse(responseCode = "200", description = "Project updated", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Department.class)))
+    @APIResponse(responseCode = "400", description = "Invalid form filling", content = @Content)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public void update(@PathParam("id") Long id, @RequestBody Project projectRequest) {
@@ -100,11 +90,8 @@ public class ProjectResource {
 
     @PUT
     @Path("assignDepartmentList/{id}")
-    @APIResponses(value = {
-            @APIResponse(responseCode = "200", description = "Assign department to project updated",
-                    content = @Content(mediaType = "application/json")),
-            @APIResponse(responseCode = "400", description = "Invalid form filling",
-                    content = @Content)})
+    @APIResponse(responseCode = "200", description = "Assign department to project updated", content = @Content(mediaType = "application/json"))
+    @APIResponse(responseCode = "400", description = "Invalid form filling", content = @Content)
     @Consumes(MediaType.APPLICATION_JSON)
     public void assignDepartmentList(@PathParam("id") Long id, List<Long> departmentIds) {
         projectService.updateDepartmentList(id, departmentIds);
@@ -113,11 +100,8 @@ public class ProjectResource {
 
     @DELETE
     @Path("/delete/{id}/")
-    @APIResponses(value = {
-            @APIResponse(responseCode = "204", description = "Project deleted",
-                    content = @Content),
-            @APIResponse(responseCode = "400", description = "Invalid form filling",
-                    content = @Content)})
+    @APIResponse(responseCode = "204", description = "Project deleted", content = @Content)
+    @APIResponse(responseCode = "400", description = "Invalid form filling", content = @Content)
     public Response deleteProjectById(@PathParam("id") Long id) {
         try {
             this.projectService.deleteById(id);

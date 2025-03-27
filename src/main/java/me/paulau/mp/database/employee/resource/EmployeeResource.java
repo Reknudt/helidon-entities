@@ -21,7 +21,6 @@ import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
-import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
 
 import static jakarta.ws.rs.core.Response.ok;
@@ -39,13 +38,8 @@ public class EmployeeResource {
 
     @GET
     @Path("/all")
-    @APIResponse(responseCode = "200", description = "Find all employees",
-            content = @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = Employee.class),
-            examples = {
-                    @ExampleObject(
-                            name = "Employee's example",
-                            description = "This is an example of JSON response from Employee's get. " +
+    @APIResponse(responseCode = "200", description = "Find all employees", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Employee.class),
+            examples = {@ExampleObject(name = "Employee's example", description = "This is an example of JSON response from Employee's get. " +
                                     "Here are an id field, name, bossId, departmentId",
                             value = """
                             {
@@ -75,9 +69,8 @@ public class EmployeeResource {
 
     @PUT
     @Path("/update")
-    @APIResponses(value = {
-            @APIResponse(responseCode = "200", description = "Employee updated", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Employee.class))),
-            @APIResponse(responseCode = "400", description = "Invalid form filling", content = @Content)})
+    @APIResponse(responseCode = "200", description = "Employee updated", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Employee.class)))
+    @APIResponse(responseCode = "400", description = "Invalid form filling", content = @Content)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response update(Employee employee) {
@@ -87,11 +80,8 @@ public class EmployeeResource {
 
     @DELETE
     @Path("/delete/{id}/")
-    @APIResponses(value = {
-            @APIResponse(responseCode = "204", description = "Employee deleted",
-                    content = @Content),
-            @APIResponse(responseCode = "400", description = "Invalid form filling",
-                    content = @Content)})
+    @APIResponse(responseCode = "204", description = "Employee deleted", content = @Content)
+    @APIResponse(responseCode = "400", description = "Invalid form filling", content = @Content)
     public Response deleteEmployeeById(@PathParam("id") Long id) {
         try {
             this.employeeService.deleteById(id);

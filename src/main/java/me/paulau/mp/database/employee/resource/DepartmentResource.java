@@ -31,9 +31,6 @@ public class DepartmentResource {
 
     private final DepartmentService departmentService;
 
-//    @PersistenceContext(unitName = "pu1")
-//    private EntityManager entityManager;
-
     @Inject
     public DepartmentResource(DepartmentService departmentService) {
         this.departmentService = departmentService;
@@ -41,9 +38,7 @@ public class DepartmentResource {
 
     @GET
     @Path("/all")
-    @APIResponse(responseCode = "200", description = "Find all departments",
-            content = @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = Department.class)))
+    @APIResponse(responseCode = "200", description = "Find all departments", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Department.class)))
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllDepartments() {
         return ok(departmentService.getAllDepartments()).build();
@@ -51,12 +46,8 @@ public class DepartmentResource {
 
     @POST
     @Path("/save")
-    @APIResponses(value = {
-            @APIResponse(responseCode = "201", description = "Department created",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Department.class))),
-            @APIResponse(responseCode = "400", description = "Invalid form filling",
-                    content = @Content)})
+    @APIResponse(responseCode = "201", description = "Department created", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Department.class)))
+    @APIResponse(responseCode = "400", description = "Invalid form filling", content = @Content)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response save(Department department) {
@@ -66,12 +57,8 @@ public class DepartmentResource {
 
     @PUT
     @Path("/{id}")
-    @APIResponses(value = {
-            @APIResponse(responseCode = "200", description = "Department updated",
-                    content = @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Department.class))),
-            @APIResponse(responseCode = "400", description = "Invalid form filling",
-                    content = @Content)})
+    @APIResponse(responseCode = "200", description = "Department updated", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Department.class)))
+    @APIResponse(responseCode = "400", description = "Invalid form filling", content = @Content)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public void update(@PathParam("id") Long id, @RequestBody Department departmentRequest) {
@@ -80,11 +67,8 @@ public class DepartmentResource {
 
     @DELETE
     @Path("/delete/{id}/")
-    @APIResponses(value = {
-            @APIResponse(responseCode = "204", description = "Department deleted",
-                    content = @Content),
-            @APIResponse(responseCode = "400", description = "Invalid form filling",
-                    content = @Content)})
+    @APIResponse(responseCode = "204", description = "Department deleted", content = @Content)
+    @APIResponse(responseCode = "400", description = "Invalid form filling", content = @Content)
     public Response deleteDepartmentById(@PathParam("id") Long id) {
         try {
             this.departmentService.deleteById(id);
