@@ -21,7 +21,10 @@ import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.jvnet.hk2.annotations.Optional;
 
+
+import java.util.Locale;
 
 import static jakarta.ws.rs.core.Response.ok;
 
@@ -53,6 +56,7 @@ public class EmployeeResource {
             }))
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllEmployees() {
+        System.out.println(Locale.getDefault());
         return ok(employeeService.getAllEmployees()).build();
     }
 
@@ -62,7 +66,7 @@ public class EmployeeResource {
     @APIResponse(responseCode = "400", description = "Invalid form filling", content = @Content)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response save(@HeaderParam(value = "Accept-Language") String locale, @Valid @RequestBody Employee employee) {
+    public Response save(@Optional @HeaderParam(value = "Accept-Language") String locale, @Valid @RequestBody Employee employee) {
         Employee save = this.employeeService.create(employee);
         return ok(save).build();
     }
